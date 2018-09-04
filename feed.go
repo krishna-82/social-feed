@@ -1,11 +1,3 @@
-// 1)  	Should get updates of people User follows , 
-// feed should be automatically created 
-// 		as users browses the app,
-/*
-assume request is passing user_id
-o/p expected -> based on user_id find recent posts and send back to reponseWriter
-*/
-
 package main
 
 import (
