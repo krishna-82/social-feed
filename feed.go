@@ -36,7 +36,13 @@ func getNewFeeds(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	feeds, err := dao.GetFeeds(followTo, params["page"])
+	var page int
+	page = 1
+	if params["page"] > 0 {
+		page = params["page"]
+	} 
+	limit = page * 10
+	feeds, err := dao.GetFeeds(followTo, limit)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
@@ -46,7 +52,13 @@ func getNewFeeds(w http.ResponseWriter, r *http.Request) {
 
 func Search(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	searchResult, err := dao.Search(params["keyword"])
+	var page int
+	page = 1
+	if params["page"] > 0 {
+		page = params["page"]
+	} 
+	limit = page * 10
+	searchResult, err := dao.Search(params["keyword"], limit)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
